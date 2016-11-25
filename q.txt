@@ -1,0 +1,27 @@
+Import MiniL.lang;
+Import MiniL.io
+public class nomdeClasse
+{
+INTEGER a=12;
+REAL b=12.0;
+STR s="wiss";
+}
+main
+{
+a=a+-12*+12;
+a=2*a;
+Out("%d",a);
+In("%f",b);
+b=b/2;
+/
+//sdhhhqhdqsqsh
+///shqjhsdhhqs
+/*sssseeeeeeeeeeeee*/
+/*qdsdqsdq
+sqdqsffsd
+qsdsdddsqdfeefef
+fe*/
+/*qdsddzd*jhdsd*/
+b+-;
+s ="wiss is wiss "sds";
+}

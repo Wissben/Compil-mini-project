@@ -1,0 +1,76 @@
+" " {printf("le mot %s est reconnu\n",yytext );}
+
+"main" {printf("le mot %s est reconnu\n",yytext );main}
+main
+"Import" {printf("le mot %s est reconnu\n",yytext );Import}
+Import
+"MiniL.lang" {printf("le mot %s est reconnu\n",yytext ); MiniLl}
+MiniL.lang
+"MiniL.io" {printf("le mot %s est reconnu\n",yytext );}
+MiniL.io
+"public" {printf("le mot %s est reconnu\n",yytext );}
+public
+"protected" {printf("le mot %s est reconnu\n",yytext );}
+protected
+"class" {printf("le mot %s est reconnu\n",yytext );}
+class
+"INTEGER" {printf("le mot %s est reconnu\n",yytext );}
+INTEGER
+"REAL" {printf("le mot %s est reconnu\n",yytext );}
+REAL
+"STR" {printf("le mot %s est reconnu\n",yytext );}
+STR
+"," {printf("le mot %s est reconnu\n",yytext );}
+,
+"CONST" {printf("le mot %s est reconnu\n",yytext );}
+CONST
+":=" {printf("le mot %s est reconnu\n",yytext );}
+:=
+";" {printf("le mot %s est reconnu\n",yytext );}
+;
+"For" {printf("le mot %s est reconnu\n",yytext );}
+For
+"In" {printf("le mot %s est reconnu\n",yytext );}
+In
+"Out" {printf("le mot %s est reconnu\n",yytext );}
+Out
+"+" {printf("le mot %s est reconnu\n",yytext );}
++
+"-" {printf("le mot %s est reconnu\n",yytext );}
+-
+"*" {printf("le mot %s est reconnu\n",yytext );}
+*
+"/" {printf("le mot %s est reconnu\n",yytext );}
+/
+">" {printf("le mot %s est reconnu\n",yytext );}
+>
+"<" {printf("le mot %s est reconnu\n",yytext );}
+<
+"=" {printf("le mot %s est reconnu\n",yytext );}
+=
+"!=" {printf("le mot %s est reconnu\n",yytext );}
+!=
+"<=" {printf("le mot %s est reconnu\n",yytext );}
+<=
+">=" {printf("le mot %s est reconnu\n",yytext );}
+>=
+"&" {printf("le mot %s est reconnu\n",yytext );}
+&
+"|" {printf("le mot %s est reconnu\n",yytext );}
+|
+"!" {printf("le mot %s est reconnu\n",yytext );}
+!
+"//" {printf("le mot %s est reconnu\n",yytext );}
+//
+")" {printf("le mot %s est reconnu\n",yytext );}
+)
+"(" {printf("le mot %s est reconnu\n",yytext );}
+(
+"[" {printf("le mot %s est reconnu\n",yytext );}
+[
+"]" {printf("le mot %s est reconnu\n",yytext );}
+]
+"{" {printf("le mot %s est reconnu\n",yytext );}
+{
+"}" {printf("le mot %s est reconnu\n",yytext );}
+}
