@@ -2,9 +2,9 @@ Import MiniLlang;
 Import MiniLio;
 public class khobz
 {
-INTEGER a,d;
+INTEGER a,d,y,rere,zdsfd,vfdf,qsdsdsqe,eee;
 REAL RealToBeTest;
-INTEGER tab1[455555];
+INTEGER tab1[69];
 //REAL a;
 REAL b;
 STR s;
@@ -18,11 +18,11 @@ Main
   {
     a:=-2;
   }*/
-For(a:=1,h[0]:="hh";a|a,a>a;a:=a-(1*2*a*2),a:=2- 2)
+/*For(a:=1,h[0]:="hh";a&a>a,a>a;a:=a-(1*2*a/2),a:=2- 2)
 {
   a:=1;
   b:=10.0;
-}
+}*/
 In("%s",h[1]);
 Out("%s",h[1]);
 }

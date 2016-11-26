@@ -16,6 +16,7 @@
   int sizeIDF;
   int AffleftType;
   int AffRightType;
+  int IDFcst;
   //End
   #define RED   "\x1B[31m"
   #define GRN   "\x1B[32m"
@@ -58,7 +59,6 @@ S
 imp
  : H imp
  | H
-
  ;
 
 H
@@ -101,12 +101,12 @@ tab
 cst
  : CONST type IDF Affect Val ',' loopCst ';' {
                                                if (srch(L,$3)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$3); return 0;} inst(&L,$3,i,2,1);
-                                               if(getType(L,$3)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
+                                               if (getType(L,$3)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
                                              }
 
  | CONST type IDF Affect Val ';'             {
                                                if (srch(L,$3)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$3); return 0;} inst(&L,$3,i,2,1);
-                                               if(getType(L,$3)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
+                                               if (getType(L,$3)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
 
                                              }
  ;
@@ -114,13 +114,13 @@ cst
 loopCst
  : IDF Affect Val ',' loopCst {
                                 if (srch(L,$1)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$1); return 0;} inst(&L,$1,i,2,1);
-                                if(getType(L,$1)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
+                                if (getType(L,$1)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
 
                               }
 
  | IDF Affect Val             {
                                 if (srch(L,$1)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$1); return 0;} inst(&L,$1,i,2,1);
-                                if(getType(L,$1)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
+                                if (getType(L,$1)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
                               }
  ;
 
@@ -150,8 +150,10 @@ ty
  ;
 
 Aff
- : IDFa Affect Expression ';' {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
-}
+ : IDFa Affect Expression ';' {
+                                 if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
+                                 if(IDFcst==1) {printf(RED"\n-----> ligne %d .ERREUR constante non modifiable \n\n" RESET,yylineno); return 0;}
+                              }
  ;
 
 Loop
@@ -210,6 +212,9 @@ Init
 
 IDFa
  : IDF                 {
+                         if(getNat(L,$1)==2) IDFcst=1;
+                         else
+                         IDFcst=0;
                          AffleftType=getType(L,$1);
                          if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" non déclaré\n\n" RESET,yylineno,$1); return 0;}
                        }
@@ -342,7 +347,7 @@ int main()
          "|"MAG"Valeur"RESET"                 |\n"
          "|"WHT"Commentaire"RESET"            |\n"
          "|"RED"Error"RESET"                  |\n"
-         "|"GRN"Programm ccepted"RESET"               |\n"
+         "|"GRN"Programm accepted"RESET"      |\n"
          "-------------------------\n"
     );
   return 0;
