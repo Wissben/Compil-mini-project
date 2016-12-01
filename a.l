@@ -20,7 +20,7 @@ Entier [+-]?(0|[1-9]{chiffre}*)
 idf [a-zA-Z][a-zA-Z0-9]*
 real [+-]?({Entier}\.[0-9]+)
 str \"[^\"\r\n]*\"
-comment (\/\*([^\*]*|(\**[^\/])*)*\*\/)|\/\/.*
+comment (\/\*([^\*]*|(\**[^\/])*)*\*\/)|\/\/.*\n?
 
 %%
 " " {printf("le mot %s est reconnu\n",yytext );}

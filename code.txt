@@ -1,19 +1,22 @@
 Import MiniLlang;
 Import MiniLio;
+Import MiniLio;
 public class khobz
 {
 INTEGER a,d,y,rere,zdsfd,vfdf,qsdsdsqe,eee;
-REAL RealToBeTest;
-INTEGER tab1[69];
+REAL a234561;
+INTEGER a235678910[69];
 //REAL a;
 REAL b;
 STR s;
 STR  h[10];
 CONST REAL k:=12.0,const:=1212.0;
 CONST STR D:="S";
-///
+INTEGER i;
+//
 Main
 {
+  h[1]:=b*h[1];
   /*For(a:=1;a<3;a:=a+ 1)
   {
     a:=-2;
@@ -23,7 +26,7 @@ Main
   a:=1;
   b:=10.0;
 }*/
-In("%s",h[1]);
+/*In("%s",h[i+a*100]);*/
 Out("%s",h[1]);
 }
 }

@@ -17,6 +17,8 @@
   int AffleftType;
   int AffRightType;
   int IDFcst;
+  int ExpLeftType;
+  int ExpRightType;
   //End
   #define RED   "\x1B[31m"
   #define GRN   "\x1B[32m"
@@ -85,27 +87,44 @@ nat
  ;
 
 simple
- : type IDF ',' loopSimple ';'  { if (srch(L,$2)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$2); return 0;} inst(&L,$2,i,0,1);}
- | type IDF ';'                 { if (srch(L,$2)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$2); return 0;} inst(&L,$2,i,0,1);}
+ : type IDF ',' loopSimple ';'  {
+                                  if (strlen($2)>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,$2); return 0;}
+                                  if (srch(L,$2)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,$2); return 0;} inst(&L,$2,i,0,1);
+                                }
+ | type IDF ';'                 {
+                                  if (strlen($2)>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,$2); return 0;}
+                                  if (srch(L,$2)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,$2); return 0;} inst(&L,$2,i,0,1);
+                                }
  ;
 
 loopSimple
- : IDF ',' loopSimple { if (srch(L,$1)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$1); return 0 ;} inst(&L,$1,i,0,1);}
- | IDF                { if (srch(L,$1)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$1); return 0 ;} inst(&L,$1,i,0,1);}
+ : IDF ',' loopSimple {
+                        if (strlen($1)>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,$1); return 0;}
+                        if (srch(L,$1)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,$1); return 0 ;} inst(&L,$1,i,0,1);
+                      }
+ | IDF                {
+                        if (strlen($1)>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,$1); return 0;}
+                        if (srch(L,$1)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,$1); return 0 ;} inst(&L,$1,i,0,1);
+                      }
  ;
 
 tab
- : type IDF '[' Entier ']' ';' { if (srch(L,$2)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" déjà déclaré\n\n" RESET,yylineno,$2); return 0;} inst(&L,$2,i,1,$4);}
+ : type IDF '[' Entier ']' ';' {
+                                     if (strlen($2)>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,$2); return 0;}
+                                     if (srch(L,$2)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,$2); return 0;} inst(&L,$2,i,1,$4);
+                                   }
  ;
 
 cst
  : CONST type IDF Affect Val ',' loopCst ';' {
-                                               if (srch(L,$3)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$3); return 0;} inst(&L,$3,i,2,1);
+                                               if (strlen($3)>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,$3); return 0;}
+                                               if (srch(L,$3)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,$3); return 0;} inst(&L,$3,i,2,1);
                                                if (getType(L,$3)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
                                              }
 
  | CONST type IDF Affect Val ';'             {
-                                               if (srch(L,$3)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$3); return 0;} inst(&L,$3,i,2,1);
+                                               if (strlen($3)>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,$3); return 0;}
+                                               if (srch(L,$3)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,$3); return 0;} inst(&L,$3,i,2,1);
                                                if (getType(L,$3)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
 
                                              }
@@ -113,13 +132,15 @@ cst
 
 loopCst
  : IDF Affect Val ',' loopCst {
-                                if (srch(L,$1)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$1); return 0;} inst(&L,$1,i,2,1);
+                                if (strlen($1)>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,$1); return 0;}
+                                if (srch(L,$1)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,$1); return 0;} inst(&L,$1,i,2,1);
                                 if (getType(L,$1)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
 
                               }
 
  | IDF Affect Val             {
-                                if (srch(L,$1)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF %s déjà déclaré\n\n" RESET,yylineno,$1); return 0;} inst(&L,$1,i,2,1);
+                                if (strlen($1)>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,$1); return 0;}
+                                if (srch(L,$1)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,$1); return 0;} inst(&L,$1,i,2,1);
                                 if (getType(L,$1)!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
                               }
  ;
@@ -165,20 +186,21 @@ Lect
                                                natIDF=getNat(L,$5);
                                                typeIDF=getType(L,$5);
                                                typeSTR=getTypeBySign($3);
-                                               if (srch(L,$5)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" non déclaré\n\n" RESET,yylineno,$5); return 0;}
-                                               if (natIDF==2)     {printf(RED"\n-----> ligne %d .ERREUR : la constante \"%s\" ne peut pas être modifiée\n\n" RESET,yylineno,$5); return 0;}
-                                               if(typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles entre %s et %s \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
+                                               if (srch(L,$5)==0)   {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$5); return 0;}
+                                               if (natIDF==1)       {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$5); return 0;}
+                                               if (natIDF==2)       {printf(RED"\n-----> ligne %d .ERREUR : la constante (%s) ne peut pas être modifiée\n\n" RESET,yylineno,$5); return 0;}
+                                               if(typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
                                              }
 
- | In '(' str ',' IDF '[' Entier ']' ')' ';' {
+ | In '(' str ',' IDF '[' Expression ']' ')' ';' {
                                                natIDF=getNat(L,$5);
                                                typeIDF=getType(L,$5);
                                                typeSTR=getTypeBySign($3);
                                                sizeIDF=getSize(L,$5);
-                                               if (srch(L,$5)==0)   {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" non déclaré\n\n" RESET,yylineno,$5); return 0;}
-                                               if (natIDF!=1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" n'est pas un tableau\n\n" RESET,yylineno,$5); return 0;}
-                                               if ($7>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau %s dépassé de %d \n\n" RESET,yylineno,$5,$7-sizeIDF+1); return 0;}
-                                               if(typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR : types incompatibles entre %s et %s \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
+                                               if (srch(L,$5)==0)   {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$5); return 0;}
+                                               if (natIDF!=1)       {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$5); return 0;}
+                                               //if ($7>=sizeIDF)     {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$5,$7-sizeIDF+1); return 0;}
+                                               if(typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR : types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
                                              }
  ;
 
@@ -187,20 +209,21 @@ Ecrit
                                                natIDF=getNat(L,$5);
                                                typeIDF=getType(L,$5);
                                                //typeSTR=getTypeBySign( strcat(  strstr($3,"%")  ,  *(strstr($3,"%")+1) ) );
-                                               if (srch(L,$5)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" non déclaré\n\n" RESET,yylineno,$5); return 0;}
-                                               if (natIDF==2)     {printf(RED"\n-----> ligne %d .ERREUR : la constante \"%s\" ne peut pas être modifiée\n\n" RESET,yylineno,$5); return 0;}
-                                               if (typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles entre %s et %s \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
+                                               if (natIDF==1)        {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$5); return 0;}
+                                               if (srch(L,$5)==0)    {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$5); return 0;}
+                                               if (natIDF==2)        {printf(RED"\n-----> ligne %d .ERREUR : la constante (%s) ne peut pas être modifiée\n\n" RESET,yylineno,$5); return 0;}
+                                               if (typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
                                              }
 
- | Out '(' str ',' IDF '[' Entier ']' ')' ';'{
+ | Out '(' str ',' IDF '[' Expression ']' ')' ';'{
                                                natIDF=getNat(L,$5);
                                                typeIDF=getType(L,$5);
                                                typeSTR=getTypeBySign($3);
                                                sizeIDF=getSize(L,$5);
-                                               if (srch(L,$5)==0)   {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" non déclaré\n\n" RESET,yylineno,$5); return 0;}
-                                               if (natIDF!=1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" n'est pas un tableau\n\n" RESET,yylineno,$5); return 0;}
-                                               if ($7>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau %s dépassé de %d \n\n" RESET,yylineno,$5,$7-sizeIDF+1); return 0;}
-                                               if (typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR : types incompatibles entre %s et %s \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
+                                               if (srch(L,$5)==0)    {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$5); return 0;}
+                                               if (natIDF!=1)        {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$5); return 0;}
+                                               //if ($7>=sizeIDF)      {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$5,$7-sizeIDF+1); return 0;}
+                                               if (typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR : types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
                                              }
  | Out '(' str ')' ';'
  ;
@@ -216,16 +239,18 @@ IDFa
                          else
                          IDFcst=0;
                          AffleftType=getType(L,$1);
-                         if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" non déclaré\n\n" RESET,yylineno,$1); return 0;}
+                         natIDF=getNat(L,$1);
+                         if (natIDF==1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$1); return 0;}
+                         if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
                        }
 
- | IDF '[' Entier ']'  {
+ | IDF '[' Expression ']'  {
                          AffleftType=getType(L,$1);
                          sizeIDF=getSize(L,$1);
                          natIDF=getNat(L,$1);
-                         if (natIDF!=1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" n'est pas un tableau\n\n" RESET,yylineno,$1); return 0;}
-                         if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" non déclaré\n\n" RESET,yylineno,$1); return 0;}
-                         if ($3>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau %s dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
+                         if (natIDF!=1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$1); return 0;}
+                         if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
+                         //if ($3>=sizeIDF)   {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau %s dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
                        }
  ;
 
@@ -281,15 +306,17 @@ Term
 Factor
  : IDF                {
                         AffRightType=getType(L,$1);
-                        if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" non déclaré\n\n" RESET,yylineno,$1); return 0;}
+                        natIDF=getNat(L,$1);
+                        if (natIDF==1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$1); return 0;}
+                        if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
                       }
- | IDF '[' Entier ']' {
+ | IDF '[' Expression ']' {
                         AffRightType=getType(L,$1);
                         sizeIDF=getSize(L,$1);
                         natIDF=getNat(L,$1);
-                        if (natIDF!=1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" n'est pas un tableau\n\n" RESET,yylineno,$1); return 0;}
-                        if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF \"%s\" non déclaré\n\n" RESET,yylineno,$1); return 0;}
-                        if ($3>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau %s dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
+                        if (natIDF!=1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$1); return 0;}
+                        if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
+                        //if ($3>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
                       }
 
  | Entier             {AffRightType=0;}
