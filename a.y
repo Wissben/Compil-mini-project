@@ -1,6 +1,7 @@
 %{
   #include <stdio.h>
   #include "ts.h"
+  #include "stack.h"
   //Useful functions
   char* getSignByType(int type);
   int getTypeBySign(char* sign);
@@ -8,6 +9,7 @@
   extern FILE* yyin;
   extern int yylineno;
   extern TS* L;
+  extern Q*teteQ;
   //Useful variables
   int i=-1;
   int natIDF;
@@ -19,6 +21,9 @@
   int IDFcst;
   int ExpLeftType;
   int ExpRightType;
+  char ch[10],chInt[10],cheFloat[10],chStr[10];
+  char temp[50];
+  char idfVal[50];
   //End
   #define RED   "\x1B[31m"
   #define GRN   "\x1B[32m"
@@ -32,6 +37,7 @@
 %union
 {
   char* chaine;
+  char* IDFa;
   char car;
   int entier;
   float Real;
@@ -48,6 +54,13 @@
 //%token <entier> EntierSigne
 %token <Real> real
 %start S
+%left '|'
+%left '&'
+%left '!'
+%left '>' greatEq lessEq '=' different '<'
+%left '+' '-'
+%left '/' '*'
+%left '(' ')'
 %%
 
 S
@@ -174,6 +187,7 @@ Aff
  : IDFa Affect Expression ';' {
                                  if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
                                  if(IDFcst==1) {printf(RED"\n-----> ligne %d .ERREUR constante non modifiable \n\n" RESET,yylineno); return 0;}
+                                 quad(&teteQ,&q,":=",temp,"",idfVal);
                               }
  ;
 
@@ -229,17 +243,19 @@ Ecrit
  ;
 
 Init
- : IDFa Affect Expression ',' Init {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}}
- | IDFa Affect Expression          {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}}
+ : IDFa Affect Expression ',' Init {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}quad(&teteQ,&q,":=",temp,"",idfVal);}
+ | IDFa Affect Expression          {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}quad(&teteQ,&q,":=",temp,"",idfVal);}
  ;
 
 IDFa
  : IDF                 {
+
                          if(getNat(L,$1)==2) IDFcst=1;
                          else
                          IDFcst=0;
                          AffleftType=getType(L,$1);
                          natIDF=getNat(L,$1);
+                         strcpy(idfVal,$1);
                          if (natIDF==1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$1); return 0;}
                          if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
                        }
@@ -248,6 +264,7 @@ IDFa
                          AffleftType=getType(L,$1);
                          sizeIDF=getSize(L,$1);
                          natIDF=getNat(L,$1);
+                         strcpy(idfVal,$1);
                          if (natIDF!=1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$1); return 0;}
                          if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
                          //if ($3>=sizeIDF)   {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau %s dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
@@ -288,42 +305,157 @@ Incf
  ;
 
 Inc
- : IDFa Affect Expression {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}}
+ : IDFa Affect Expression {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}quad(&teteQ,&q,":=",temp,"",idfVal);}
  ;
 
 Expression
- : Expression '+' Term
- | Expression '-' Term
- | Term
+ : Expression '+' Expression{
+                               Element* op1=pop(&S);
+                               Element* op2=pop(&S);
+                               if(strcmp(op1->type,op2->type)==0)
+                                {
+                                  strcpy(temp,op1->name);
+                                  strcat(temp,"+");
+                                  strcat(temp,op2->name);
+                                  quad(&teteQ,&q,"+",op1->name,op2->name,temp);
+                                  push(&S,"Expression",temp,op1->type);
+                                }
+                                else
+                                {
+                                  printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;
+                                }
+                            }
+ | Expression '-' Term       {
+                               Element* op1=pop(&S);
+                               Element* op2=pop(&S);
+                               if(strcmp(op1->type,op2->type)==0)
+                                {
+                                  strcpy(temp,op1->name);
+                                  strcat(temp,"-");
+                                  strcat(temp,op2->name);
+                                  quad(&teteQ,&q,"-",op1->name,op2->name,temp);
+                                  push(&S,"Expression",temp,op1->type);
+                                 }
+                                 else
+                                 {
+                                   printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;
+                                 }
+
+                             }
+
+ | Term                      {
+                               Element* op=pop(&S);
+                               push(&S,"Expression",op->name,op->type);
+                               strcpy(temp,op->name);
+                               quad(&teteQ,&q,"",op->name,"",temp);
+                             }
  ;
 
 Term
- : Term '*' Factor
- | Term '/' Factor
- | Factor
+ : Term '*' Factor {
+                      Element* op1=pop(&S);
+                      Element* op2=pop(&S);
+                      if(strcmp(op1->type,op2->type)==0)
+                      {
+
+                        strcpy(temp,op1->name);
+                        strcat(temp,"*");
+                        strcat(temp,op2->name);
+                        quad(&teteQ,&q,"*",op1->name,op2->name,temp);
+                        push(&S,"Term",temp,op1->type);
+                      }
+                      else
+                      {
+                        printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;
+                      }
+                    }
+
+ | Term '/' Factor  {
+                      Element* op1=pop(&S);
+                      Element* op2=pop(&S);
+                      if(strcmp(op1->type,op2->type)==0)
+                      {
+
+                        strcpy(temp,op1->name);
+                        strcat(temp,"/");
+                        strcat(temp,op2->name);
+                        quad(&teteQ,&q,"/",op1->name,op2->name,temp);
+                        push(&S,"Term",temp,op1->type);
+                      }
+                      else
+                      {
+                        printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;
+                      }
+                    }
+
+ | Factor           {
+                      Element* op=pop(&S);
+                      push(&S,"Term",op->name,op->type);
+                      strcpy(temp,op->name);
+                      quad(&teteQ,&q,"",op->name,"",temp);
+                    }
  ;
 
 Factor
  : IDF                {
                         AffRightType=getType(L,$1);
                         natIDF=getNat(L,$1);
+                        //strcpy(idfVal,$1);
                         if (natIDF==1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$1); return 0;}
                         if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
+                        int t=getType(L,$1);
+                        sprintf(ch,"%d",t);
+                        push(&S,"Factor",$1,ch);
                       }
  | IDF '[' Expression ']' {
-                        AffRightType=getType(L,$1);
-                        sizeIDF=getSize(L,$1);
-                        natIDF=getNat(L,$1);
-                        if (natIDF!=1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$1); return 0;}
-                        if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
-                        //if ($3>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
-                      }
+                           AffRightType=getType(L,$1);
+                           sizeIDF=getSize(L,$1);
+                           natIDF=getNat(L,$1);
+                           //strcpy(idfVal,$1);
+                           if (natIDF!=1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$1); return 0;}
+                           if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
+                           int t=getType(L,$1);
+                           sprintf(ch,"%d",t);
+                           push(&S,"Factor",$1,ch);
+                           //if ($3>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
+                          }
 
- | Entier             {AffRightType=0;}
- | real               {AffRightType=1;}
- | str                {AffRightType=2;}
- | '(' Expression ')'
- | '-' Factor
+ | Entier              {
+                         AffRightType=0;
+                         //sprintf(idfVal,"%d",$1);
+                         //sprintf(ch,"%d",t);
+                         char chInt[10];
+                         sprintf(chInt,"%d",$1);
+                         sprintf(ch,"%d",0);
+                         push(&S,"Factor",chInt,ch);
+                       }
+
+ | real                {
+                         AffRightType=1;
+                         //sprintf(idfVal,"%f",$1);
+                         //sprintf(ch,"%d",t);
+                         char cheFloat[10];
+                         sprintf(chInt,"%f",$1);
+                         sprintf(ch,"%d",1);
+                         push(&S,"Factor",chInt,ch);
+                       }
+
+ | str                 {
+                         AffRightType=2;
+                         //strcpy(idfVal,$1);
+                         //sprintf(ch,"%d",t);
+                         sprintf(ch,"%d",2);
+                         push(&S,"Factor",$1,ch);
+                       }
+
+ | '(' Expression ')'  {
+                        Element* p=pop(&S);
+                        push(&S,"Factor",p->name,p->type);
+                       }
+ | '-' Factor          {
+                         Element* op=pop(&S);
+                         push(&S,"Factor",op->name,op->type);
+                       }
  ;
 
 %%
@@ -362,6 +494,7 @@ char* getSignByType(int type)
 int main()
 {
   create(&L);
+  initStack(&S);
   yyin=fopen("code.txt","r");
   yyparse();
   show(L);
@@ -377,6 +510,8 @@ int main()
          "|"GRN"Programm accepted"RESET"      |\n"
          "-------------------------\n"
     );
+    showStack(S);
+    afficherQ(teteQ);
   return 0;
   /*printf(RED "red\n" RESET);
   printf(GRN "green\n" RESET);

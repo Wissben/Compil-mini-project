@@ -182,17 +182,9 @@ void show(TS*L)
     }
     i=p->taille;
     printf(MAG"%d\t\t\t"RESET"|\n",p->taille);
-    printf("|");
-    space(100/4-1,'-');
-    printf("|");
-    space(100/4-1,'-');
-    printf("|");
-    space(100/4-1,'-');
-    printf("|");
-    space(100/4-1,'-');
-    printf("|");
-    printf("\n");
   }
+  space(98,'-');
+  printf("\n");
 }
 //////////////////////////////////////////
 int update(TS**L,TS*srch)
@@ -219,38 +211,26 @@ p=teteQ;
 		p=p->svt;
 	}
 }
-int qSrch(Q* teteQ,char *oper,char *op1,char *op2,char *res)
-{
-  Q*p;
-  p=teteQ;
-  while (p!=NULL)
-  {
-    if(strcmp(p->oper,oper)==0||strcmp(p->op1,op1)==0||strcmp(p->op2,op2)==0||strcmp(p->res,res)==0)
-     return 1;
-    p=p->svt;
-  }
-  return 0;
-}
+
 void quad(Q** teteQ,Q** q,char *oper,char *op1,char *op2,char *res){
 		Q * p;
-    
+
 			p=(Q *)malloc(sizeof(Q));
 			 strcpy(p->oper,oper);
 			  strcpy(p->op1,op1);
 			   strcpy(p->op2,op2);
 			    strcpy(p->res,res);
-        p->svt=NULL;
-        if(*teteQ ==NULL)
-        {
-          *teteQ=p;
-          *q=*teteQ;
-        }
-        else
-        {
-          (*q)->svt=p;
-          *q=p;
-        }
-
+			p->svt=NULL;
+			if(*teteQ ==NULL)
+ 			 {
+         *teteQ=p;
+ 		     *q=*teteQ;
+       }
+ 			else
+      {
+			 (*q)->svt=p;
+			 *q=p;
+		   }
 }
 //////////////:
 

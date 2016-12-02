@@ -3,9 +3,10 @@ Import MiniLio;
 Import MiniLio;
 public class khobz
 {
-INTEGER a,d,y,rere,zdsfd,vfdf,qsdsdsqe,eee;
+INTEGER a,y,rere,zdsfd,vfdf,qsdsdsqe,eee;
+INTEGER d;
 REAL a234561;
-INTEGER a235678910[69];
+INTEGER a2[69];
 //REAL a;
 REAL b;
 STR s;
@@ -16,17 +17,22 @@ INTEGER i;
 //
 Main
 {
-  h[1]:=b*h[1];
-  /*For(a:=1;a<3;a:=a+ 1)
+   a:=a*2+ a+ 2+ 2+ 4+ 8+ 6+ 4+ 10;
+   a:=2;
+  h[12]:=h[1];
+  d:=2*2+rere;
+  In("%d",a2[a*+22]);
+  For(a:=1;a<3;a:=a+ 1)
   {
-    a:=-2;
-  }*/
-/*For(a:=1,h[0]:="hh";a&a>a,a>a;a:=a-(1*2*a/2),a:=2- 2)
+    a:=- 2;
+  }
+
+For(a:=1,h[0]:="aa";a&a>a,a>a;a:=a-(1*2*a/2),a:=2- 2)
 {
   a:=1;
   b:=10.0;
-}*/
-/*In("%s",h[i+a*100]);*/
+}
+In("%s",h[i+a*100]);
 Out("%s",h[1]);
 }
 }
