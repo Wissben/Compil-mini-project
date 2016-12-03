@@ -3,7 +3,7 @@ Import MiniLio;
 Import MiniLio;
 public class khobz
 {
-INTEGER a,y,rere,zdsfd,vfdf,qsdsdsqe,eee;
+INTEGER a,y,c,zdsfd,vfdf,qsdsdsqe,eee;
 INTEGER d;
 REAL a234561;
 INTEGER a2[69];
@@ -17,18 +17,20 @@ INTEGER i;
 //
 Main
 {
-   a:=a*2+ a+ 2+ 2+ 4+ 8+ 6+ 4+ 10;
-   a:=2;
-  h[12]:=h[1];
-  d:=2*2+rere;
+   a:=(5- 2)+ 2;
+   a:= a+ a*2+ 4/8;
+   //a:=2;
+  h[12]:=h[i+ 2];
+  d:=2*2+c;
   In("%d",a2[a*+22]);
-  For(a:=1;a<3;a:=a+ 1)
+  For(a:=1;a>a|a;a:=a+ 1)
   {
-    a:=- 2;
+    a:=-2;
   }
 
-For(a:=1,h[0]:="aa";a&a>a,a>a;a:=a-(1*2*a/2),a:=2- 2)
+For(a:=1;a&a>a,a>a;a:=a-(1*2)*(a/a+ 2 ),a:=2- 2)
 {
+  a:=1;
   a:=1;
   b:=10.0;
 }

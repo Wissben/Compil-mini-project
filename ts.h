@@ -218,6 +218,7 @@ p=teteQ;
 		printf("( %s , %s , %s , %s )\n",p->oper,p->op1,p->op2,p->res);
 		p=p->svt;
 	}
+  printf("\n************ QUAD ************\n\n");
 }
 int qSrch(Q* teteQ,char *oper,char *op1,char *op2,char *res)
 {
@@ -233,7 +234,7 @@ int qSrch(Q* teteQ,char *oper,char *op1,char *op2,char *res)
 }
 void quad(Q** teteQ,Q** q,char *oper,char *op1,char *op2,char *res){
 		Q * p;
-    
+
 			p=(Q *)malloc(sizeof(Q));
 			 strcpy(p->oper,oper);
 			  strcpy(p->op1,op1);

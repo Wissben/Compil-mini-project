@@ -278,12 +278,9 @@ Condf
 
 Cond
  : '(' Cond ')'
- | '!' Cond
- | Cond comparator Cond
- | Cond binary Cond
- | IDFa
- | Entier
- | real
+ | Expression comparator Expression
+// | Cond binary Cond
+ | A
  ;
 
 comparator
@@ -292,6 +289,12 @@ comparator
  | '<'
  | lessEq
  | '='
+ ;
+
+A
+ :Cond binary Cond
+ |Cond
+ |Expression
  ;
 
 binary
@@ -310,8 +313,8 @@ Inc
 
 Expression
  : Expression '+' Expression{
-                               Element* op1=pop(&S);
                                Element* op2=pop(&S);
+                               Element* op1=pop(&S);
                                if(strcmp(op1->type,op2->type)==0)
                                 {
                                   strcpy(temp,op1->name);
@@ -326,8 +329,8 @@ Expression
                                 }
                             }
  | Expression '-' Term       {
-                               Element* op1=pop(&S);
                                Element* op2=pop(&S);
+                               Element* op1=pop(&S);
                                if(strcmp(op1->type,op2->type)==0)
                                 {
                                   strcpy(temp,op1->name);
@@ -347,14 +350,14 @@ Expression
                                Element* op=pop(&S);
                                push(&S,"Expression",op->name,op->type);
                                strcpy(temp,op->name);
-                               quad(&teteQ,&q,"",op->name,"",temp);
+                               //quad(&teteQ,&q,"",op->name,"",temp);
                              }
  ;
 
 Term
  : Term '*' Factor {
-                      Element* op1=pop(&S);
                       Element* op2=pop(&S);
+                      Element* op1=pop(&S);
                       if(strcmp(op1->type,op2->type)==0)
                       {
 
@@ -371,8 +374,8 @@ Term
                     }
 
  | Term '/' Factor  {
-                      Element* op1=pop(&S);
                       Element* op2=pop(&S);
+                      Element* op1=pop(&S);
                       if(strcmp(op1->type,op2->type)==0)
                       {
 
@@ -392,7 +395,7 @@ Term
                       Element* op=pop(&S);
                       push(&S,"Term",op->name,op->type);
                       strcpy(temp,op->name);
-                      quad(&teteQ,&q,"",op->name,"",temp);
+                      //quad(&teteQ,&q,"",op->name,"",temp);
                     }
  ;
 
@@ -450,6 +453,10 @@ Factor
 
  | '(' Expression ')'  {
                         Element* p=pop(&S);
+                        char tmp[100];
+                        //strcpy(tmp,"(");
+                        //strcat(tmp,p->name);
+                        //strcat(tmp,")\0");
                         push(&S,"Factor",p->name,p->type);
                        }
  | '-' Factor          {
@@ -498,6 +505,7 @@ int main()
   yyin=fopen("code.txt","r");
   yyparse();
   show(L);
+  afficherQ(teteQ);
   printf("\n\n-------------------------\n"
          "|        Legende        |\n"
          "-------------------------\n"
@@ -510,8 +518,8 @@ int main()
          "|"GRN"Programm accepted"RESET"      |\n"
          "-------------------------\n"
     );
-    showStack(S);
-    afficherQ(teteQ);
+    //showStack(S);
+
   return 0;
   /*printf(RED "red\n" RESET);
   printf(GRN "green\n" RESET);
