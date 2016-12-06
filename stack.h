@@ -15,9 +15,9 @@
 //déclaration
 typedef struct Element
 {
-  char left[10];
-  char name[10];
-  char type[10];
+  char left[100];
+  char name[100];
+  char type[100];
   struct Element* sv;
 } Element;
 Element* S=null;

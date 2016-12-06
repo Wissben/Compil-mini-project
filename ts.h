@@ -163,6 +163,9 @@ void show(TS*L)
   for(p=L;p->sv!=null;p=p->sv)
   {
     int i=p->type;
+    if(strcmp(p->nom,"khobz")==0)
+    printf("|"RED "%s"RESET,p->nom );
+    else
     printf("|"BLU "%s"RESET,p->nom );
     space(100/4-strlen(p->nom)-1,' ');
     switch (i)
@@ -181,17 +184,27 @@ void show(TS*L)
       default : printf("Nature inconnu\n"); break;
     }
     i=p->taille;
+    if(p->taille == 69)
+    printf(YEL"%d\t\t\t"RESET"|\n",p->taille);
+    else
     printf(MAG"%d\t\t\t"RESET"|\n",p->taille);
-    printf("|");
-    space(100/4-1,'-');
-    printf("|");
-    space(100/4-1,'-');
-    printf("|");
-    space(100/4-1,'-');
-    printf("|");
-    space(100/4-1,'-');
-    printf("|");
-    printf("\n");
+    if(p->sv->sv==NULL)
+    {
+      space(98,'-');
+    }
+    else
+    {
+      printf("|");
+      space(100/4-1,'-');
+      printf("|");
+      space(100/4-1,'-');
+      printf("|");
+      space(100/4-1,'-');
+      printf("|");
+      space(100/4-1,'-');
+      printf("|");
+      printf("\n");
+    }
   }
 }
 //////////////////////////////////////////

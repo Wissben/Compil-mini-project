@@ -21,9 +21,9 @@
   int IDFcst;
   int ExpLeftType;
   int ExpRightType;
-  char ch[10],chInt[10],cheFloat[10],chStr[10];
-  char temp[50];
-  char idfVal[50];
+  char ch[100],chInt[100],cheFloat[100],chStr[100],chTab[100];
+  char temp[100];
+  char idfVal[100];
   //End
   #define RED   "\x1B[31m"
   #define GRN   "\x1B[32m"
@@ -201,7 +201,7 @@ Lect
                                                typeIDF=getType(L,$5);
                                                typeSTR=getTypeBySign($3);
                                                if (srch(L,$5)==0)   {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$5); return 0;}
-                                               if (natIDF==1)       {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$5); return 0;}
+                                               //if (natIDF==1)       {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$5); return 0;}
                                                if (natIDF==2)       {printf(RED"\n-----> ligne %d .ERREUR : la constante (%s) ne peut pas être modifiée\n\n" RESET,yylineno,$5); return 0;}
                                                if(typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
                                              }
@@ -293,7 +293,6 @@ comparator
 
 A
  :Cond binary Cond
- |Cond
  |Expression
  ;
 
@@ -313,15 +312,19 @@ Inc
 
 Expression
  : Expression '+' Expression{
+   //showStack(S);
+
                                Element* op2=pop(&S);
                                Element* op1=pop(&S);
                                if(strcmp(op1->type,op2->type)==0)
                                 {
                                   strcpy(temp,op1->name);
                                   strcat(temp,"+");
+                                  //printf(RED"%s\n"RESET,op1->name );
                                   strcat(temp,op2->name);
                                   quad(&teteQ,&q,"+",op1->name,op2->name,temp);
                                   push(&S,"Expression",temp,op1->type);
+                                  //strcpy(temp,"");
                                 }
                                 else
                                 {
@@ -419,6 +422,11 @@ Factor
                            if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
                            int t=getType(L,$1);
                            sprintf(ch,"%d",t);
+                          //  char tm[100];
+                          //  strcpy(tm,"[");
+                          //  strcat(tm,temp);
+                          //  strcat(tm,"]");
+                          //  strcat($1,tm);
                            push(&S,"Factor",$1,ch);
                            //if ($3>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
                           }
@@ -427,7 +435,7 @@ Factor
                          AffRightType=0;
                          //sprintf(idfVal,"%d",$1);
                          //sprintf(ch,"%d",t);
-                         char chInt[10];
+                         //char chInt[10];
                          sprintf(chInt,"%d",$1);
                          sprintf(ch,"%d",0);
                          push(&S,"Factor",chInt,ch);
@@ -437,7 +445,7 @@ Factor
                          AffRightType=1;
                          //sprintf(idfVal,"%f",$1);
                          //sprintf(ch,"%d",t);
-                         char cheFloat[10];
+                         //char cheFloat[10];
                          sprintf(chInt,"%f",$1);
                          sprintf(ch,"%d",1);
                          push(&S,"Factor",chInt,ch);
@@ -454,10 +462,10 @@ Factor
  | '(' Expression ')'  {
                         Element* p=pop(&S);
                         char tmp[100];
-                        //strcpy(tmp,"(");
-                        //strcat(tmp,p->name);
-                        //strcat(tmp,")\0");
-                        push(&S,"Factor",p->name,p->type);
+                        strcpy(tmp,"(");
+                        strcat(tmp,p->name);
+                        strcat(tmp,")\0");
+                        push(&S,"Factor",tmp,p->type);
                        }
  | '-' Factor          {
                          Element* op=pop(&S);
