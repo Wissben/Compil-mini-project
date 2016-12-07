@@ -123,6 +123,9 @@ loopSimple
 
 tab
  : type IDF '[' Entier ']' ';' {
+                                     sprintf(chTab,"%d",$4);
+                                     quad(&teteQ,&q,"BOUNDS","0",chTab,"");
+                                     quad(&teteQ,&q,"ADEC",$2,"","");
                                      if (strlen($2)>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,$2); return 0;}
                                      if (srch(L,$2)==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,$2); return 0;} inst(&L,$2,i,1,$4);
                                    }
@@ -222,7 +225,7 @@ Ecrit
  : Out '(' str ',' IDF ')' ';'               {
                                                natIDF=getNat(L,$5);
                                                typeIDF=getType(L,$5);
-                                               //typeSTR=getTypeBySign( strcat(  strstr($3,"%")  ,  *(strstr($3,"%")+1) ) );
+                                               typeSTR=getTypeBySign($3);
                                                if (natIDF==1)        {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$5); return 0;}
                                                if (srch(L,$5)==0)    {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$5); return 0;}
                                                if (natIDF==2)        {printf(RED"\n-----> ligne %d .ERREUR : la constante (%s) ne peut pas être modifiée\n\n" RESET,yylineno,$5); return 0;}
@@ -267,6 +270,11 @@ IDFa
                          strcpy(idfVal,$1);
                          if (natIDF!=1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$1); return 0;}
                          if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
+                         strcpy(chTab,$1);
+                         strcat(chTab,"[");
+                         strcat(chTab,temp);
+                         strcat(chTab,"]");
+                         quad(&teteQ,&q,chTab,"","",chTab);
                          //if ($3>=sizeIDF)   {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau %s dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
                        }
  ;
@@ -311,7 +319,7 @@ Inc
  ;
 
 Expression
- : Expression '+' Expression{
+ : Expression '+' Term{
    //showStack(S);
 
                                Element* op2=pop(&S);
@@ -428,6 +436,11 @@ Factor
                           //  strcat(tm,"]");
                           //  strcat($1,tm);
                            push(&S,"Factor",$1,ch);
+                           strcpy(chTab,$1);
+                           strcat(chTab,"[");
+                           strcat(chTab,temp);
+                           strcat(chTab,"]");
+                           quad(&teteQ,&q,chTab,"","",chTab);
                            //if ($3>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
                           }
 

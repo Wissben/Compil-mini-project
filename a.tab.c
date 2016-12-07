@@ -492,13 +492,13 @@ static const yytype_uint8 yytranslate[] =
 static const yytype_uint16 yyrline[] =
 {
        0,    67,    67,    75,    76,    80,    81,    86,    87,    92,
-      93,    97,    98,    99,   103,   107,   114,   118,   125,   132,
-     138,   147,   154,   162,   163,   164,   168,   169,   170,   174,
-     175,   179,   180,   181,   182,   183,   187,   195,   199,   209,
-     222,   232,   242,   246,   247,   251,   263,   275,   276,   280,
-     281,   283,   287,   288,   289,   290,   291,   295,   296,   300,
-     301,   305,   306,   310,   314,   334,   352,   361,   379,   397,
-     406,   416,   434,   444,   454,   462,   470
+      93,    97,    98,    99,   103,   107,   114,   118,   125,   135,
+     141,   150,   157,   165,   166,   167,   171,   172,   173,   177,
+     178,   182,   183,   184,   185,   186,   190,   198,   202,   212,
+     225,   235,   245,   249,   250,   254,   266,   283,   284,   288,
+     289,   291,   295,   296,   297,   298,   299,   303,   304,   308,
+     309,   313,   314,   318,   322,   342,   360,   369,   387,   405,
+     414,   424,   447,   457,   467,   475,   483
 };
 #endif
 
@@ -547,23 +547,23 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-       1,    17,    14,   109,     1,   -15,    36,   -99,   -99,   -99,
-      70,   -99,   -99,   -99,   -13,    35,    90,   -99,   -99,   -99,
-      94,    86,    90,   -99,   -99,   -99,    55,    58,    54,   -99,
-     -12,    95,    -7,    84,   -99,    72,     7,    91,    93,    96,
-      89,    88,    -7,   -99,   -99,   -99,   -99,   112,   100,    97,
-      99,   -99,   -99,   -99,    52,   101,   102,   103,     0,   106,
-     -99,     0,    84,   -99,   105,   107,   -99,   113,   116,   108,
-      75,     0,     0,   114,   -99,   -99,   -99,    -6,    98,   -99,
-     -99,    -8,   -99,   -99,   117,   115,    11,     0,   111,   118,
-     119,   -99,    40,     0,     0,     0,   -99,     0,     0,   -99,
-       7,   -99,    11,   120,    65,   -99,    64,    49,    74,    77,
-     -99,   -99,    -3,   -99,    98,   -99,   -99,   110,    42,    38,
-     101,   -99,   -99,    11,    11,   -99,   -99,   -99,   -99,   -99,
-       0,   101,   121,     0,   122,     0,   -99,   107,   -99,   132,
-     123,   124,   -99,    92,   104,   -99,   -99,    18,   -99,    26,
-     -99,     0,   125,   101,   126,   127,   104,    -7,   -99,   129,
-     131,   128,   -99,   -99,   -99
+       1,    53,    16,    76,     1,    13,    22,   -99,   -99,   -99,
+      70,   -99,   -99,   -99,    48,    60,     9,   -99,   -99,   -99,
+      90,   107,     9,   -99,   -99,   -99,    80,    81,    84,   -99,
+      59,   106,    -7,    86,   -99,    82,    62,    92,    93,    94,
+      89,    95,    -7,   -99,   -99,   -99,   -99,   113,    99,   100,
+     101,   -99,   -99,   -99,    37,    96,   102,   103,    -1,   108,
+     -99,    -1,    86,   -99,   104,   105,   -99,   109,   115,   114,
+      42,    -1,    -1,   112,   -99,   -99,   -99,    -6,    91,   -99,
+     -99,    -8,   -99,   -99,   118,   116,     8,    -1,   110,   111,
+     119,   -99,    -4,    -1,    -1,    -1,   -99,    -1,    -1,   -99,
+      62,   -99,     8,   120,    65,   -99,    63,     5,    72,    73,
+     -99,   -99,    17,    91,    91,   -99,   -99,   122,    39,    38,
+      96,   -99,   -99,     8,     8,   -99,   -99,   -99,   -99,   -99,
+      -1,    96,   123,    -1,   124,    -1,   -99,   105,   -99,   138,
+     125,   126,   -99,    85,    98,   -99,   -99,    26,   -99,    34,
+     -99,    -1,   127,    96,   128,   129,    98,    -7,   -99,   131,
+     133,   121,   -99,   -99,   -99
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -593,10 +593,10 @@ static const yytype_uint8 yydefact[] =
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -99,   -99,   133,   -99,   -99,   137,   -99,   -99,    73,   -99,
-     -99,     2,    66,   145,   -42,   -99,   -99,   -99,   -99,   -99,
-      37,   -54,    46,   -98,   -99,   -99,   -99,    19,   -99,   -55,
-      76,   -69
+     -99,   -99,   135,   -99,   -99,   139,   -99,   -99,    78,   -99,
+     -99,     4,    67,   148,   -42,   -99,   -99,   -99,   -99,   -99,
+      40,   -54,    46,   -98,   -99,   -99,   -99,    19,   -99,   -55,
+      24,   -69
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -614,45 +614,45 @@ static const yytype_int16 yydefgoto[] =
 static const yytype_uint8 yytable[] =
 {
       60,    68,    91,    77,   118,     1,    81,    37,    38,    39,
-      94,    95,    94,    95,     7,    94,    95,    92,    12,    71,
-      33,    34,     5,     6,    35,    99,   143,    15,   115,   116,
-      71,    96,   107,    40,   136,    72,    94,    95,   112,   113,
-      73,    74,    75,    76,    94,    95,   102,   119,    51,    52,
-      53,    73,    74,    75,    76,   154,    94,    95,    94,    95,
-     125,   126,   127,   155,   128,   129,   139,    94,    95,    13,
-     121,   122,   111,    16,   111,   144,   138,    68,   147,    14,
-     149,   131,    94,    95,    65,    66,   125,   126,   127,    28,
-     128,   129,    32,   121,   122,    30,   156,   123,    31,   139,
-      17,    18,    19,    20,    17,    18,    19,    89,   132,    90,
-     133,   134,    36,   135,    50,   161,     8,     9,    97,    98,
-     121,   122,    94,    95,    48,    58,    55,    59,    56,    61,
-      63,    57,    62,    87,   100,    82,    64,    11,    83,   150,
-      88,    40,   137,    69,    70,    80,    86,    84,   101,   151,
-      93,   108,   110,   120,   146,   148,   153,   152,   109,    29,
-     159,   160,   162,   157,   163,    27,   117,   164,   145,   142,
-       0,   114,   158
+      94,    95,    94,    95,    94,    95,     7,    92,    71,    17,
+      18,    19,    20,    94,    95,    99,   143,    71,   115,   116,
+     111,    96,   107,    40,    72,    94,    95,   131,   112,    73,
+      74,    75,    76,   102,    94,    95,    12,   119,    73,    74,
+      75,    76,    94,    95,   136,    13,    94,    95,     5,     6,
+     125,   126,   127,   154,   128,   129,   139,   121,   122,    65,
+      66,   155,   111,   138,    89,   144,    90,    68,   147,    14,
+     149,    94,    95,     8,     9,   125,   126,   127,    15,   128,
+     129,    33,    34,   121,   122,    35,   156,   123,    16,   139,
+      17,    18,    19,    51,    52,    53,   132,   134,   133,   135,
+      28,    97,    98,   121,   122,   161,    94,    95,   113,   114,
+      30,    31,    32,    36,    50,    58,    48,    55,    56,    57,
+      61,    62,    87,    63,    59,   100,    40,    83,    64,    11,
+      82,   150,    86,    69,    70,    84,    88,    80,    93,   101,
+     108,   109,   110,   120,   137,   151,   146,   148,   153,   152,
+     164,    29,   159,   160,   162,   157,   163,   117,    27,   142,
+       0,   145,   158
 };
 
 static const yytype_int16 yycheck[] =
 {
       42,    55,    71,    58,   102,     4,    61,    14,    15,    16,
-      18,    19,    18,    19,     0,    18,    19,    72,    33,    19,
-      32,    33,     5,     6,    36,    33,   124,    40,    97,    98,
-      19,    37,    87,    40,    37,    35,    18,    19,    93,    94,
-      40,    41,    42,    43,    18,    19,    35,   102,    41,    42,
-      43,    40,    41,    42,    43,    37,    18,    19,    18,    19,
-      22,    23,    24,    37,    26,    27,   120,    18,    19,    33,
-      28,    29,    34,    38,    34,   130,    34,   131,   133,     9,
-     135,    32,    18,    19,    32,    33,    22,    23,    24,     3,
-      26,    27,    38,    28,    29,    40,   151,    32,    40,   153,
-      10,    11,    12,    13,    10,    11,    12,    32,    34,    34,
-      36,    34,    17,    36,    42,   157,     7,     8,    20,    21,
-      28,    29,    18,    19,    40,    36,    35,    39,    35,    17,
-      33,    35,    32,    17,    17,    62,    37,     4,    33,   137,
-      32,    40,    32,    41,    41,    39,    33,    40,    33,    17,
-      36,    40,    33,    33,    33,    33,    32,    34,    40,    22,
-      34,    34,    33,    38,    33,    20,   100,    39,   131,   123,
-      -1,    95,   153
+      18,    19,    18,    19,    18,    19,     0,    72,    19,    10,
+      11,    12,    13,    18,    19,    33,   124,    19,    97,    98,
+      34,    37,    87,    40,    35,    18,    19,    32,    93,    40,
+      41,    42,    43,    35,    18,    19,    33,   102,    40,    41,
+      42,    43,    18,    19,    37,    33,    18,    19,     5,     6,
+      22,    23,    24,    37,    26,    27,   120,    28,    29,    32,
+      33,    37,    34,    34,    32,   130,    34,   131,   133,     9,
+     135,    18,    19,     7,     8,    22,    23,    24,    40,    26,
+      27,    32,    33,    28,    29,    36,   151,    32,    38,   153,
+      10,    11,    12,    41,    42,    43,    34,    34,    36,    36,
+       3,    20,    21,    28,    29,   157,    18,    19,    94,    95,
+      40,    40,    38,    17,    42,    36,    40,    35,    35,    35,
+      17,    32,    17,    33,    39,    17,    40,    33,    37,     4,
+      62,   137,    33,    41,    41,    40,    32,    39,    36,    33,
+      40,    40,    33,    33,    32,    17,    33,    33,    32,    34,
+      39,    22,    34,    34,    33,    38,    33,   100,    20,   123,
+      -1,   131,   153
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -670,7 +670,7 @@ static const yytype_uint8 yystos[] =
       39,    73,    52,    33,    40,    55,    33,    17,    32,    32,
       34,    75,    73,    36,    18,    19,    37,    20,    21,    33,
       17,    33,    35,    66,    67,    69,    73,    73,    40,    40,
-      33,    34,    73,    73,    74,    75,    75,    56,    67,    73,
+      33,    34,    73,    74,    74,    75,    75,    56,    67,    73,
       33,    28,    29,    32,    70,    22,    23,    24,    26,    27,
       68,    32,    34,    36,    34,    36,    37,    32,    34,    65,
       71,    72,    66,    67,    73,    64,    33,    73,    33,    73,
@@ -1425,102 +1425,105 @@ yyreduce:
   case 18:
 #line 125 "a.y" /* yacc.c:1646  */
     {
+                                     sprintf(chTab,"%d",(yyvsp[-2].entier));
+                                     quad(&teteQ,&q,"BOUNDS","0",chTab,"");
+                                     quad(&teteQ,&q,"ADEC",(yyvsp[-4].chaine),"","");
                                      if (strlen((yyvsp[-4].chaine))>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,(yyvsp[-4].chaine)); return 0;}
                                      if (srch(L,(yyvsp[-4].chaine))==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,(yyvsp[-4].chaine)); return 0;} inst(&L,(yyvsp[-4].chaine),i,1,(yyvsp[-2].entier));
                                    }
-#line 1432 "a.tab.c" /* yacc.c:1646  */
+#line 1435 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 132 "a.y" /* yacc.c:1646  */
+#line 135 "a.y" /* yacc.c:1646  */
     {
                                                if (strlen((yyvsp[-5].chaine))>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,(yyvsp[-5].chaine)); return 0;}
                                                if (srch(L,(yyvsp[-5].chaine))==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,(yyvsp[-5].chaine)); return 0;} inst(&L,(yyvsp[-5].chaine),i,2,1);
                                                if (getType(L,(yyvsp[-5].chaine))!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
                                              }
-#line 1442 "a.tab.c" /* yacc.c:1646  */
+#line 1445 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 138 "a.y" /* yacc.c:1646  */
+#line 141 "a.y" /* yacc.c:1646  */
     {
                                                if (strlen((yyvsp[-3].chaine))>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,(yyvsp[-3].chaine)); return 0;}
                                                if (srch(L,(yyvsp[-3].chaine))==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,(yyvsp[-3].chaine)); return 0;} inst(&L,(yyvsp[-3].chaine),i,2,1);
                                                if (getType(L,(yyvsp[-3].chaine))!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
 
                                              }
-#line 1453 "a.tab.c" /* yacc.c:1646  */
+#line 1456 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 147 "a.y" /* yacc.c:1646  */
+#line 150 "a.y" /* yacc.c:1646  */
     {
                                 if (strlen((yyvsp[-4].chaine))>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,(yyvsp[-4].chaine)); return 0;}
                                 if (srch(L,(yyvsp[-4].chaine))==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,(yyvsp[-4].chaine)); return 0;} inst(&L,(yyvsp[-4].chaine),i,2,1);
                                 if (getType(L,(yyvsp[-4].chaine))!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
 
                               }
-#line 1464 "a.tab.c" /* yacc.c:1646  */
+#line 1467 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 154 "a.y" /* yacc.c:1646  */
+#line 157 "a.y" /* yacc.c:1646  */
     {
                                 if (strlen((yyvsp[-2].chaine))>10) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) trop long \n\n" RESET,yylineno,(yyvsp[-2].chaine)); return 0;}
                                 if (srch(L,(yyvsp[-2].chaine))==1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) déjà déclaré\n\n" RESET,yylineno,(yyvsp[-2].chaine)); return 0;} inst(&L,(yyvsp[-2].chaine),i,2,1);
                                 if (getType(L,(yyvsp[-2].chaine))!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
                               }
-#line 1474 "a.tab.c" /* yacc.c:1646  */
+#line 1477 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 162 "a.y" /* yacc.c:1646  */
+#line 165 "a.y" /* yacc.c:1646  */
     {AffRightType=0;}
-#line 1480 "a.tab.c" /* yacc.c:1646  */
+#line 1483 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 163 "a.y" /* yacc.c:1646  */
+#line 166 "a.y" /* yacc.c:1646  */
     {AffRightType=2;}
-#line 1486 "a.tab.c" /* yacc.c:1646  */
+#line 1489 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 164 "a.y" /* yacc.c:1646  */
+#line 167 "a.y" /* yacc.c:1646  */
     {AffRightType=1;}
-#line 1492 "a.tab.c" /* yacc.c:1646  */
+#line 1495 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 168 "a.y" /* yacc.c:1646  */
+#line 171 "a.y" /* yacc.c:1646  */
     {i=0;}
-#line 1498 "a.tab.c" /* yacc.c:1646  */
+#line 1501 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 169 "a.y" /* yacc.c:1646  */
+#line 172 "a.y" /* yacc.c:1646  */
     {i=1;}
-#line 1504 "a.tab.c" /* yacc.c:1646  */
+#line 1507 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 170 "a.y" /* yacc.c:1646  */
+#line 173 "a.y" /* yacc.c:1646  */
     {i=2;}
-#line 1510 "a.tab.c" /* yacc.c:1646  */
+#line 1513 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 187 "a.y" /* yacc.c:1646  */
+#line 190 "a.y" /* yacc.c:1646  */
     {
                                  if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
                                  if(IDFcst==1) {printf(RED"\n-----> ligne %d .ERREUR constante non modifiable \n\n" RESET,yylineno); return 0;}
                                  quad(&teteQ,&q,":=",temp,"",idfVal);
                               }
-#line 1520 "a.tab.c" /* yacc.c:1646  */
+#line 1523 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 199 "a.y" /* yacc.c:1646  */
+#line 202 "a.y" /* yacc.c:1646  */
     {
                                                natIDF=getNat(L,(yyvsp[-2].chaine));
                                                typeIDF=getType(L,(yyvsp[-2].chaine));
@@ -1530,11 +1533,11 @@ yyreduce:
                                                if (natIDF==2)       {printf(RED"\n-----> ligne %d .ERREUR : la constante (%s) ne peut pas être modifiée\n\n" RESET,yylineno,(yyvsp[-2].chaine)); return 0;}
                                                if(typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),(yyvsp[-4].chaine)); return 0;}
                                              }
-#line 1534 "a.tab.c" /* yacc.c:1646  */
+#line 1537 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 209 "a.y" /* yacc.c:1646  */
+#line 212 "a.y" /* yacc.c:1646  */
     {
                                                natIDF=getNat(L,(yyvsp[-5].chaine));
                                                typeIDF=getType(L,(yyvsp[-5].chaine));
@@ -1545,25 +1548,25 @@ yyreduce:
                                                //if ($7>=sizeIDF)     {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$5,$7-sizeIDF+1); return 0;}
                                                if(typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR : types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),(yyvsp[-7].chaine)); return 0;}
                                              }
-#line 1549 "a.tab.c" /* yacc.c:1646  */
+#line 1552 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 222 "a.y" /* yacc.c:1646  */
+#line 225 "a.y" /* yacc.c:1646  */
     {
                                                natIDF=getNat(L,(yyvsp[-2].chaine));
                                                typeIDF=getType(L,(yyvsp[-2].chaine));
-                                               //typeSTR=getTypeBySign( strcat(  strstr($3,"%")  ,  *(strstr($3,"%")+1) ) );
+                                               typeSTR=getTypeBySign((yyvsp[-4].chaine));
                                                if (natIDF==1)        {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,(yyvsp[-2].chaine)); return 0;}
                                                if (srch(L,(yyvsp[-2].chaine))==0)    {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,(yyvsp[-2].chaine)); return 0;}
                                                if (natIDF==2)        {printf(RED"\n-----> ligne %d .ERREUR : la constante (%s) ne peut pas être modifiée\n\n" RESET,yylineno,(yyvsp[-2].chaine)); return 0;}
                                                if (typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),(yyvsp[-4].chaine)); return 0;}
                                              }
-#line 1563 "a.tab.c" /* yacc.c:1646  */
+#line 1566 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 232 "a.y" /* yacc.c:1646  */
+#line 235 "a.y" /* yacc.c:1646  */
     {
                                                natIDF=getNat(L,(yyvsp[-5].chaine));
                                                typeIDF=getType(L,(yyvsp[-5].chaine));
@@ -1574,23 +1577,23 @@ yyreduce:
                                                //if ($7>=sizeIDF)      {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$5,$7-sizeIDF+1); return 0;}
                                                if (typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR : types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),(yyvsp[-7].chaine)); return 0;}
                                              }
-#line 1578 "a.tab.c" /* yacc.c:1646  */
+#line 1581 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 246 "a.y" /* yacc.c:1646  */
+#line 249 "a.y" /* yacc.c:1646  */
     {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}quad(&teteQ,&q,":=",temp,"",idfVal);}
-#line 1584 "a.tab.c" /* yacc.c:1646  */
+#line 1587 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 247 "a.y" /* yacc.c:1646  */
+#line 250 "a.y" /* yacc.c:1646  */
     {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}quad(&teteQ,&q,":=",temp,"",idfVal);}
-#line 1590 "a.tab.c" /* yacc.c:1646  */
+#line 1593 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 251 "a.y" /* yacc.c:1646  */
+#line 254 "a.y" /* yacc.c:1646  */
     {
 
                          if(getNat(L,(yyvsp[0].chaine))==2) IDFcst=1;
@@ -1602,11 +1605,11 @@ yyreduce:
                          if (natIDF==1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,(yyvsp[0].chaine)); return 0;}
                          if (srch(L,(yyvsp[0].chaine))==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,(yyvsp[0].chaine)); return 0;}
                        }
-#line 1606 "a.tab.c" /* yacc.c:1646  */
+#line 1609 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 263 "a.y" /* yacc.c:1646  */
+#line 266 "a.y" /* yacc.c:1646  */
     {
                          AffleftType=getType(L,(yyvsp[-3].chaine));
                          sizeIDF=getSize(L,(yyvsp[-3].chaine));
@@ -1614,19 +1617,24 @@ yyreduce:
                          strcpy(idfVal,(yyvsp[-3].chaine));
                          if (natIDF!=1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,(yyvsp[-3].chaine)); return 0;}
                          if (srch(L,(yyvsp[-3].chaine))==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,(yyvsp[-3].chaine)); return 0;}
+                         strcpy(chTab,(yyvsp[-3].chaine));
+                         strcat(chTab,"[");
+                         strcat(chTab,temp);
+                         strcat(chTab,"]");
+                         quad(&teteQ,&q,chTab,"","",chTab);
                          //if ($3>=sizeIDF)   {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau %s dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
                        }
-#line 1620 "a.tab.c" /* yacc.c:1646  */
+#line 1628 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 310 "a.y" /* yacc.c:1646  */
+#line 318 "a.y" /* yacc.c:1646  */
     {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}quad(&teteQ,&q,":=",temp,"",idfVal);}
-#line 1626 "a.tab.c" /* yacc.c:1646  */
+#line 1634 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 314 "a.y" /* yacc.c:1646  */
+#line 322 "a.y" /* yacc.c:1646  */
     {
    //showStack(S);
 
@@ -1647,11 +1655,11 @@ yyreduce:
                                   printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;
                                 }
                             }
-#line 1651 "a.tab.c" /* yacc.c:1646  */
+#line 1659 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 334 "a.y" /* yacc.c:1646  */
+#line 342 "a.y" /* yacc.c:1646  */
     {
                                Element* op2=pop(&S);
                                Element* op1=pop(&S);
@@ -1669,22 +1677,22 @@ yyreduce:
                                  }
 
                              }
-#line 1673 "a.tab.c" /* yacc.c:1646  */
+#line 1681 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 352 "a.y" /* yacc.c:1646  */
+#line 360 "a.y" /* yacc.c:1646  */
     {
                                Element* op=pop(&S);
                                push(&S,"Expression",op->name,op->type);
                                strcpy(temp,op->name);
                                //quad(&teteQ,&q,"",op->name,"",temp);
                              }
-#line 1684 "a.tab.c" /* yacc.c:1646  */
+#line 1692 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 361 "a.y" /* yacc.c:1646  */
+#line 369 "a.y" /* yacc.c:1646  */
     {
                       Element* op2=pop(&S);
                       Element* op1=pop(&S);
@@ -1702,11 +1710,11 @@ yyreduce:
                         printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;
                       }
                     }
-#line 1706 "a.tab.c" /* yacc.c:1646  */
+#line 1714 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 379 "a.y" /* yacc.c:1646  */
+#line 387 "a.y" /* yacc.c:1646  */
     {
                       Element* op2=pop(&S);
                       Element* op1=pop(&S);
@@ -1724,22 +1732,22 @@ yyreduce:
                         printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;
                       }
                     }
-#line 1728 "a.tab.c" /* yacc.c:1646  */
+#line 1736 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 397 "a.y" /* yacc.c:1646  */
+#line 405 "a.y" /* yacc.c:1646  */
     {
                       Element* op=pop(&S);
                       push(&S,"Term",op->name,op->type);
                       strcpy(temp,op->name);
                       //quad(&teteQ,&q,"",op->name,"",temp);
                     }
-#line 1739 "a.tab.c" /* yacc.c:1646  */
+#line 1747 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 406 "a.y" /* yacc.c:1646  */
+#line 414 "a.y" /* yacc.c:1646  */
     {
                         AffRightType=getType(L,(yyvsp[0].chaine));
                         natIDF=getNat(L,(yyvsp[0].chaine));
@@ -1750,11 +1758,11 @@ yyreduce:
                         sprintf(ch,"%d",t);
                         push(&S,"Factor",(yyvsp[0].chaine),ch);
                       }
-#line 1754 "a.tab.c" /* yacc.c:1646  */
+#line 1762 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 416 "a.y" /* yacc.c:1646  */
+#line 424 "a.y" /* yacc.c:1646  */
     {
                            AffRightType=getType(L,(yyvsp[-3].chaine));
                            sizeIDF=getSize(L,(yyvsp[-3].chaine));
@@ -1770,13 +1778,18 @@ yyreduce:
                           //  strcat(tm,"]");
                           //  strcat($1,tm);
                            push(&S,"Factor",(yyvsp[-3].chaine),ch);
+                           strcpy(chTab,(yyvsp[-3].chaine));
+                           strcat(chTab,"[");
+                           strcat(chTab,temp);
+                           strcat(chTab,"]");
+                           quad(&teteQ,&q,chTab,"","",chTab);
                            //if ($3>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
                           }
-#line 1776 "a.tab.c" /* yacc.c:1646  */
+#line 1789 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 434 "a.y" /* yacc.c:1646  */
+#line 447 "a.y" /* yacc.c:1646  */
     {
                          AffRightType=0;
                          //sprintf(idfVal,"%d",$1);
@@ -1786,11 +1799,11 @@ yyreduce:
                          sprintf(ch,"%d",0);
                          push(&S,"Factor",chInt,ch);
                        }
-#line 1790 "a.tab.c" /* yacc.c:1646  */
+#line 1803 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 444 "a.y" /* yacc.c:1646  */
+#line 457 "a.y" /* yacc.c:1646  */
     {
                          AffRightType=1;
                          //sprintf(idfVal,"%f",$1);
@@ -1800,11 +1813,11 @@ yyreduce:
                          sprintf(ch,"%d",1);
                          push(&S,"Factor",chInt,ch);
                        }
-#line 1804 "a.tab.c" /* yacc.c:1646  */
+#line 1817 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 454 "a.y" /* yacc.c:1646  */
+#line 467 "a.y" /* yacc.c:1646  */
     {
                          AffRightType=2;
                          //strcpy(idfVal,$1);
@@ -1812,11 +1825,11 @@ yyreduce:
                          sprintf(ch,"%d",2);
                          push(&S,"Factor",(yyvsp[0].chaine),ch);
                        }
-#line 1816 "a.tab.c" /* yacc.c:1646  */
+#line 1829 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 462 "a.y" /* yacc.c:1646  */
+#line 475 "a.y" /* yacc.c:1646  */
     {
                         Element* p=pop(&S);
                         char tmp[100];
@@ -1825,20 +1838,20 @@ yyreduce:
                         strcat(tmp,")\0");
                         push(&S,"Factor",tmp,p->type);
                        }
-#line 1829 "a.tab.c" /* yacc.c:1646  */
+#line 1842 "a.tab.c" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 470 "a.y" /* yacc.c:1646  */
+#line 483 "a.y" /* yacc.c:1646  */
     {
                          Element* op=pop(&S);
                          push(&S,"Factor",op->name,op->type);
                        }
-#line 1838 "a.tab.c" /* yacc.c:1646  */
+#line 1851 "a.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1842 "a.tab.c" /* yacc.c:1646  */
+#line 1855 "a.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2066,7 +2079,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 476 "a.y" /* yacc.c:1906  */
+#line 489 "a.y" /* yacc.c:1906  */
 
 int yyerror(char* msg)
 {

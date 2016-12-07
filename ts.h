@@ -226,24 +226,32 @@ int update(TS**L,TS*srch)
 void afficherQ(Q * teteQ){
 Q * p;
 p=teteQ;
-         printf("\n************ QUAD ************\n\n");
+         printf("\n\n\n*********************************** QUAD ***********************************\n\n");
          	while(p!=NULL){
-		printf("( %s , %s , %s , %s )\n",p->oper,p->op1,p->op2,p->res);
+		printf("(\t"MAG"%s"RESET"\t,\t"BLU"%s"RESET"\t,\t"BLU"%s"RESET"\t,\t"GRN"%s"RESET"\t)\n",p->oper,p->op1,p->op2,p->res);
 		p=p->svt;
 	}
-  printf("\n************ QUAD ************\n\n");
+  printf("\n*********************************** QUAD ***********************************\n\n\n");
 }
-int qSrch(Q* teteQ,char *oper,char *op1,char *op2,char *res)
+Q* qSrch(Q* teteQ,char *oper,char *op1,char *op2,char *res)
 {
+  Q*resultat=NULL;
   Q*p;
   p=teteQ;
   while (p!=NULL)
   {
-    if(strcmp(p->oper,oper)==0||strcmp(p->op1,op1)==0||strcmp(p->op2,op2)==0||strcmp(p->res,res)==0)
-     return 1;
+    if(strcmp(p->oper,oper)==0&&strcmp(p->op1,op1)==0&&strcmp(p->op2,op2)==0&&strcmp(p->res,res)==0)
+     {
+       res=malloc(sizeof(Q));
+       strcpy(resultat->oper,p->oper);
+       strcpy(resultat->op1,p->op1);
+       strcpy(resultat->op2,p->op2);
+       strcpy(resultat->res,p->res);
+       return resultat;
+     }
     p=p->svt;
   }
-  return 0;
+  return resultat;
 }
 void quad(Q** teteQ,Q** q,char *oper,char *op1,char *op2,char *res){
 		Q * p;

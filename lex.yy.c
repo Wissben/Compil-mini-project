@@ -884,192 +884,192 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 26 "a.l"
-{printf("le mot %s est reconnu\n",yytext );}
+{printf("Le mot %s est reconnu\n",yytext );}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 27 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return Main;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return Main;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 28 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return Import;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return Import;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 29 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext ); return MiniLlang;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext ); return MiniLlang;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 30 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return MiniLio;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return MiniLio;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 31 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return public;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return public;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 32 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return protected;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return protected;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 33 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return class;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return class;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 34 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return INTEGER;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return INTEGER;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 35 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return REAL;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return REAL;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 36 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return STR;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return STR;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 37 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return ',';}
+{printf("Le mot %s est reconnu\n",yytext );return ',';}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 38 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return CONST;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return CONST;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 39 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return Affect;}
+{printf("Le mot %s est reconnu\n",yytext );return Affect;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 40 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return ';';}
+{printf("Le mot %s est reconnu\n",yytext );return ';';}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 41 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return For;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return For;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 42 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return In;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return In;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 43 "a.l"
-{printf("le mot " BLU "%s" RESET" est reconnu\n",yytext );return Out;}
+{printf("Le mot " BLU "%s" RESET" est reconnu\n",yytext );return Out;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 44 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '+';}
+{printf("Le mot %s est reconnu\n",yytext );return '+';}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 45 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '-';}
+{printf("Le mot %s est reconnu\n",yytext );return '-';}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 46 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '*';}
+{printf("Le mot %s est reconnu\n",yytext );return '*';}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 47 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '/';}
+{printf("Le mot %s est reconnu\n",yytext );return '/';}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 48 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '>';}
+{printf("Le mot %s est reconnu\n",yytext );return '>';}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 49 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '<';}
+{printf("Le mot %s est reconnu\n",yytext );return '<';}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 50 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '=';}
+{printf("Le mot %s est reconnu\n",yytext );return '=';}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 51 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return different;}
+{printf("Le mot %s est reconnu\n",yytext );return different;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 52 "a.l"
-{printf("le mot %s est reconnu\n",yytext ); return lessEq;}
+{printf("Le mot %s est reconnu\n",yytext ); return lessEq;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 53 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return greatEq;}
+{printf("Le mot %s est reconnu\n",yytext );return greatEq;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 54 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '&';}
+{printf("Le mot %s est reconnu\n",yytext );return '&';}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 55 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '|';}
+{printf("Le mot %s est reconnu\n",yytext );return '|';}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 56 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '!';}
+{printf("Le mot %s est reconnu\n",yytext );return '!';}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 57 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return doubleSLash;}
+{printf("Le mot %s est reconnu\n",yytext );return doubleSLash;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 58 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return ')';}
+{printf("Le mot %s est reconnu\n",yytext );return ')';}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 59 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '(';}
+{printf("Le mot %s est reconnu\n",yytext );return '(';}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 60 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '[';}
+{printf("Le mot %s est reconnu\n",yytext );return '[';}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 61 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return ']';}
+{printf("Le mot %s est reconnu\n",yytext );return ']';}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 62 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '{';}
+{printf("Le mot %s est reconnu\n",yytext );return '{';}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 63 "a.l"
-{printf("le mot %s est reconnu\n",yytext );return '}';}
+{printf("Le mot %s est reconnu\n",yytext );return '}';}
 	YY_BREAK
 case 39:
 /* rule 39 can match eol */
@@ -1090,23 +1090,23 @@ YY_RULE_SETUP
 case 42:
 YY_RULE_SETUP
 #line 67 "a.l"
-{printf("le mot " BLU "%s" RESET" est un identifiant \n", yytext);yylval.chaine=strdup(yytext);return IDF;}
+{printf("Le mot " BLU "%s" RESET" est un identifiant \n", yytext);yylval.chaine=strdup(yytext);return IDF;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 68 "a.l"
-{printf("le mot " YEL "%s" RESET" est une chaine de caract\n",yytext );yylval.chaine=strdup(yytext);return str;}
+{printf("Le mot " YEL "%s" RESET" est une chaine de caract\n",yytext );yylval.chaine=strdup(yytext);return str;}
 	YY_BREAK
 case 44:
 /* rule 44 can match eol */
 YY_RULE_SETUP
 #line 69 "a.l"
-{printf("le mot " WHT "%s" RESET" est un commentaire\n",yytext );}
+{printf("Le mot " WHT "%s" RESET" est un commentaire\n",yytext );}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 70 "a.l"
-{printf("le mot %s est faux \n",yytext );}
+{printf("Le mot %s est faux \n",yytext );}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
