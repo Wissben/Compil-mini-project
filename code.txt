@@ -6,8 +6,8 @@ public class khobz
 INTEGER a,y,c,zdsfd,vfdf,qsdsdsqe,eee;
 INTEGER khobz,d;
 REAL a234561;
-INTEGER a2[69];
-//REAL a;
+INTEGER a2[70];
+REAL ar;
 REAL b;
 STR s;
 STR  h[10];
@@ -17,25 +17,31 @@ INTEGER i;
 //
 Main
 {
-   a:=(5- 2)+ 2;
-   a:=((a)+ 2+ 3+ 4+ 5)/(1+ a*(2+ 2))*(2+ (2/a+ (a)));
-   a:=a+-2;
-   //a:=2;
-  h[12]:=h[i+ 2];
-  d:=2*2+c;
-  In("%d",a2[a*+22]);
-  For(a:=1;a>a|a;a:=a+ 1)
+    a:=(5- 2)+ 2;
+    a:=((a)+ 1* a+ 4+ 5)/12;
+    a:=a+-2;
+    a2[5]:=a2[i];
+    s:= s;
+    h[12]:=h[i+ 2];
+    d:=2*2+c;
+    In("%d",a2[a+ 22]);
+  For(a:=1;a>a;a:=a+ a)
   {
-    a:=-2;
+    a2[2]:=khobz;
+    For(a:=1;(a>2)|(a<5);b:=b+ 5.0)
+    {
+      a2[2]:=khobz;
+
+
+    }
+
   }
 
-For(a:=1;a&a>a,a>a;a:=a-(1*2)*(a/a+ 2 ),a:=2- 2)
+For(a:=1;a>a;a:=2)
 {
-  a:=1- a2[1];
-  a:=1;
-  b:=10.0;
+  a:=((a)+ 2+ 3+ 4+ 5)/(1+ a*(2+ 2))*(2+ (2/a+ (a)));
 }
-In("%s",h);
+In("%s",s);
 Out("%s",s);
 }
 }

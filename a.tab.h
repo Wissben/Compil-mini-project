@@ -76,16 +76,20 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 38 "a.y" /* yacc.c:1909  */
+#line 42 "a.y" /* yacc.c:1909  */
 
   char* chaine;
-  char* IDFa;
+
   char car;
   int entier;
   float Real;
+  struct perso
+  {
+    char typeVar[2550];
+    char str[2550];
+  } perso;
 
-
-#line 89 "a.tab.h" /* yacc.c:1909  */
+#line 93 "a.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

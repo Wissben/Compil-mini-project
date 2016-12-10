@@ -22,17 +22,7 @@ typedef struct TS
   struct TS* sv;
 } TS;
 /////
-typedef struct Q
-{
-	char oper[100];
-        char op1[100];
-        char op2[100];
-        char res[100];
-	struct Q *svt;
-}Q;
-////////
-Q*teteQ=NULL;
-Q*q=NULL;
+
 TS*L=NULL;
 ////////
 int create (TS** L)
@@ -223,12 +213,33 @@ int update(TS**L,TS*srch)
   }
 }
 /////////////::
+
+typedef struct Q
+{
+	char oper[100];
+  char op1[100];
+  char op2[100];
+  char res[100];
+  int num;
+	struct Q *svt;
+}Q;
+////////
+Q*teteQ=NULL;
+Q*q=NULL;
+int QuadNum=0;
+
+int getNumQuad()
+{
+  return QuadNum+1;
+}
+
 void afficherQ(Q * teteQ){
 Q * p;
 p=teteQ;
          printf("\n\n\n*********************************** QUAD ***********************************\n\n");
          	while(p!=NULL){
-		printf("(\t"MAG"%s"RESET"\t,\t"BLU"%s"RESET"\t,\t"BLU"%s"RESET"\t,\t"GRN"%s"RESET"\t)\n",p->oper,p->op1,p->op2,p->res);
+		printf(WHT"%d-"RESET"(\t"MAG"%s"RESET"\t,\t"BLU"%s"RESET"\t,\t"BLU"%s"RESET"\t,\t"GRN"%s"RESET"\t)\n",p->num,p->oper,p->op1,p->op2,p->res);
+    printf(WHT"--------------------------------------------------------------------------------------\n"RESET);
 		p=p->svt;
 	}
   printf("\n*********************************** QUAD ***********************************\n\n\n");
@@ -253,9 +264,9 @@ Q* qSrch(Q* teteQ,char *oper,char *op1,char *op2,char *res)
   }
   return resultat;
 }
-void quad(Q** teteQ,Q** q,char *oper,char *op1,char *op2,char *res){
+Q* quad(Q** teteQ,Q** q,char *oper,char *op1,char *op2,char *res){
 		Q * p;
-
+    QuadNum++;
 			p=(Q *)malloc(sizeof(Q));
 			 strcpy(p->oper,oper);
 			  strcpy(p->op1,op1);
@@ -264,15 +275,19 @@ void quad(Q** teteQ,Q** q,char *oper,char *op1,char *op2,char *res){
         p->svt=NULL;
         if(*teteQ ==NULL)
         {
+          p->num=QuadNum;
           *teteQ=p;
           *q=*teteQ;
+          return *teteQ;
         }
         else
         {
+          p->num=QuadNum;
           (*q)->svt=p;
           *q=p;
+          return *q;
         }
-
+return NULL;
 }
 //////////////:
 

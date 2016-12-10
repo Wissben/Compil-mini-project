@@ -10,10 +10,6 @@
   extern int yylineno;
   extern TS* L;
   extern Q*teteQ;
-  Q* Q1 =NULL;
-  Q* Q2 =NULL;
-  int s1,s2,s3;
-
   //Useful variables
   int i=-1;
   int natIDF;
@@ -25,7 +21,7 @@
   int IDFcst;
   int ExpLeftType;
   int ExpRightType;
-  char ch[100],chInt[100],cheFloat[100],chStr[100],chTab[100],CondSave[255];
+  char ch[100],chInt[100],cheFloat[100],chStr[100],chTab[100];
   char temp[100];
   char idfVal[100];
   //End
@@ -41,14 +37,14 @@
 %union
 {
   char* chaine;
-
+  char* IDFa;
   char car;
   int entier;
   float Real;
   struct perso
   {
-    char typeVar[2550];
-    char str[2550];
+    char typeVar[255];
+    char str[512];
   } perso;
 }
 
@@ -57,11 +53,11 @@
 %token doubleSLash ',' ';' ')' '(' '[' ']' '{' '}'
 %token <chaine> IDF
 %token <chaine> str
-
+//%token <chaine> comment
 %token <entier> Entier
-
+//%token <entier> EntierSigne
 %token <Real> real
-%type<perso> Condf Cond comparator A binary Expression IDFa Factor Term
+%type<perso> Condf Cond comparator A binary Expression IDFa
 %start S
 %left '|'
 %left '&'
@@ -195,12 +191,18 @@ ty
  | %empty
  ;
 
+
+Loop
+ : For '(' Init ';' Condf ';' Incf ')' '{' INST '}'
+ ;
+
 Lect
  : In '(' str ',' IDF ')' ';'                {
                                                natIDF=getNat(L,$5);
                                                typeIDF=getType(L,$5);
                                                typeSTR=getTypeBySign($3);
                                                if (srch(L,$5)==0)   {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$5); return 0;}
+                                               //if (natIDF==1)       {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$5); return 0;}
                                                if (natIDF==2)       {printf(RED"\n-----> ligne %d .ERREUR : la constante (%s) ne peut pas être modifiée\n\n" RESET,yylineno,$5); return 0;}
                                                if(typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
                                              }
@@ -208,11 +210,11 @@ Lect
  | In '(' str ',' IDF '[' Expression ']' ')' ';' {
                                                natIDF=getNat(L,$5);
                                                typeIDF=getType(L,$5);
-
                                                typeSTR=getTypeBySign($3);
                                                sizeIDF=getSize(L,$5);
                                                if (srch(L,$5)==0)   {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$5); return 0;}
                                                if (natIDF!=1)       {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$5); return 0;}
+                                               //if ($7>=sizeIDF)     {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$5,$7-sizeIDF+1); return 0;}
                                                if(typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR : types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
                                              }
  ;
@@ -235,57 +237,25 @@ Ecrit
                                                sizeIDF=getSize(L,$5);
                                                if (srch(L,$5)==0)    {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$5); return 0;}
                                                if (natIDF!=1)        {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$5); return 0;}
-
+                                               //if ($7>=sizeIDF)      {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$5,$7-sizeIDF+1); return 0;}
                                                if (typeIDF!=typeSTR) {printf(RED"\n-----> ligne %d .ERREUR : types incompatibles entre (%s) et (%s) \n\n" RESET,yylineno,getSignByType(typeIDF),$3); return 0;}
                                              }
  | Out '(' str ')' ';'
  ;
 
- Loop
-  : For '(' Init           {
-                              s1 = getNumQuad();
-                           }
-
-  ';' Condf                {
-                              Q1 = quad(&teteQ,&q,"BZ","",CondSave,"");
-                              Q2 = quad(&teteQ,&q,"BR","",CondSave,"");
-                              s2 = getNumQuad();
-                           }
-
-  ';' Incf                 {
-                             char Save[100];
-                             sprintf(Save,"%d",s1);
-                             quad(&teteQ,&q,"BR",Save,"","");
-                             sprintf(Save,"%d",getNumQuad());
-                             strcpy(Q2->op1,Save);
-    }
-
-   ')' '{' INST            {
-                            char Save[100];
-                            sprintf(Save,"%d",s2);
-                            quad(&teteQ,&q,"BR",Save,"","");
-                            sprintf(Save,"%d",getNumQuad());
-                            strcpy(Q1->op2,Save);
-                           }
-
-   '}'
-  ;
-
 Init
- : IDFa Affect Expression ',' Init {if(strcmp($1.typeVar,$3.typeVar)!=0) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
-                                      quad(&teteQ,&q,":=",$3.str,"",$1.str);}
- | IDFa Affect Expression           {
-                                      if(strcmp($1.typeVar,$3.typeVar)!=0) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
-                                      quad(&teteQ,&q,":=",$3.str,"",$1.str);}
+ : IDFa Affect Expression ',' Init {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}quad(&teteQ,&q,":=",temp,"",idfVal);}
+ | IDFa Affect Expression          {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}quad(&teteQ,&q,":=",temp,"",idfVal);}
  ;
 
 Aff
  : IDFa Affect Expression ';' {
-                                if(strcmp($1.typeVar,$3.typeVar)!=0) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
+                                if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
                                 if(IDFcst==1) {printf(RED"\n-----> ligne %d .ERREUR constante non modifiable \n\n" RESET,yylineno); return 0;}
-                                quad(&teteQ,&q,":=",$3.str,"",$1.str);
+                                quad(&teteQ,&q,":=",temp,"",$1.str);
  }
  ;
+
 
 IDFa
  : IDF                 {
@@ -293,15 +263,10 @@ IDFa
                          if(getNat(L,$1)==2) IDFcst=1;
                          else
                          IDFcst=0;
-
                          AffleftType=getType(L,$1);
                          natIDF=getNat(L,$1);
-
+                         strcpy(idfVal,$1);
                          strcpy($$.str,$1);
-                         char c[255];
-                         char* sign=getSignByType(AffleftType);
-                         sprintf(c,"%d",AffleftType);
-                         strcpy($$.typeVar,c);
                          if (natIDF==1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$1); return 0;}
                          if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
                        }
@@ -318,24 +283,14 @@ IDFa
                          strcat(chTab,$3.str);
                          strcat(chTab,"]");
                          strcpy($$.str,chTab);
-                         char c[255];
-                         char* sign=getSignByType(AffleftType);
-
-                         if(strcmp(sign,"%s")!=0)
-                         {
-                           sprintf(c,sign,AffleftType);
-                           strcpy($$.typeVar,c);
-                         }
-                         else
-                         strcpy($$.typeVar,"2");
                          quad(&teteQ,&q,chTab,"","",$3.str);
-
+                         //if ($3>=sizeIDF)   {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau %s dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
                        }
  ;
 
 Condf
- : Cond ',' Condf {strcpy(CondSave,$1.str);}
- | Cond {strcpy(CondSave,$1.str);}
+ : Cond ',' Condf //{strcpy(Con,$1.str);}
+ | Cond //{strcpy(Con,$1.str);}
  ;
 
 Cond
@@ -361,16 +316,15 @@ A
                   strcat($$.str,")");
                 }
  |Expression comparator Expression {
-
-                                      if(strcmp($1.typeVar,$3.typeVar)!=0)
+   //printf("%d////%d\n",$1.typeVar,$3.typeVar );
+                                      if(!strcmp($1.typeVar,$3.typeVar))
                                        {printf(RED"\n-----> ligne %d .ERREUR : Types incompatibles \n\n" RESET,yylineno); return 0;}
                                        strcpy($$.str,$1.str);
                                        strcat($$.str,$2.str);
                                        strcat($$.str,$3.str);
-
+                                       printf(RED"%s\n"RESET,$$.str );
                                        quad(&teteQ,&q,$2.str,$1.str,$3.str,$$.str);
                                    }
- |IDFa
  ;
 
 comparator
@@ -380,6 +334,7 @@ comparator
  | lessEq {strcpy($$.str,"<=");}
  | '=' {strcpy($$.str,"=");}
  ;
+
 
 binary
  : '&' {strcpy($$.str,"&");}
@@ -392,22 +347,28 @@ Incf
  ;
 
 Inc
- : IDFa Affect Expression {if(strcmp($1.typeVar,$3.typeVar)!=0) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}
- quad(&teteQ,&q,":=",$3.str,"",$1.str);}
+ : IDFa Affect Expression {if(AffleftType!=AffRightType) {printf(RED"\n-----> ligne %d .ERREUR :  types incompatibles \n\n" RESET,yylineno); return 0;}quad(&teteQ,&q,":=",temp,"",idfVal);}
  ;
 
 Expression
  : Expression '+' Term{
+   //showStack(S);
 
-                               if(strcmp($1.typeVar,$3.typeVar)==0)
+                               Element* op2=pop(&S);
+                               Element* op1=pop(&S);
+                               if(strcmp(op1->type,op2->type)==0)
                                 {
-                                  strcpy(temp,$1.str);
+                                  strcpy(temp,op1->name);
                                   strcat(temp,"+");
-                                  strcat(temp,$3.str);
+                                  //printf(RED"%s\n"RESET,op1->name );
+                                  strcat(temp,op2->name);
+                                  quad(&teteQ,&q,"+",op1->name,op2->name,temp);
+                                  push(&S,"Expression",temp,op1->type);
+                                  //strcpy(temp,"");
+                                  
                                   strcpy($$.str,temp);
-                                  strcpy($$.typeVar,$1.typeVar);
-                                  quad(&teteQ,&q,"+",$1.str,$3.str,$$.str);
-
+                                  printf(GRN"%s\n"RESET,$$.str );
+                                  strcpy($$.typeVar,op1->type);
                                  }
                                 else
                                 {
@@ -415,16 +376,15 @@ Expression
                                 }
                             }
  | Expression '-' Term       {
-
-                               if(strcmp($1.typeVar,$3.typeVar)==0)
+                               Element* op2=pop(&S);
+                               Element* op1=pop(&S);
+                               if(strcmp(op1->type,op2->type)==0)
                                 {
-                                  strcpy(temp,$1.str);
+                                  strcpy(temp,op1->name);
                                   strcat(temp,"-");
-                                  strcat(temp,$3.str);
-                                  strcpy($$.str,temp);
-                                  strcpy($$.typeVar,$1.typeVar);
-                                  quad(&teteQ,&q,"-",$1.str,$3.str,temp);
-
+                                  strcat(temp,op2->name);
+                                  quad(&teteQ,&q,"-",op1->name,op2->name,temp);
+                                  push(&S,"Expression",temp,op1->type);
                                  }
                                  else
                                  {
@@ -434,25 +394,25 @@ Expression
                              }
 
  | Term                      {
-
-                               strcpy($$.str,$1.str);
-                               strcpy($$.typeVar,$1.typeVar);
-                               //quad(&teteQ,&q,"",$1.str,"",$$.str);
+                               Element* op=pop(&S);
+                               push(&S,"Expression",op->name,op->type);
+                               strcpy(temp,op->name);
+                               //quad(&teteQ,&q,"",op->name,"",temp);
                              }
  ;
 
 Term
  : Term '*' Factor {
-
-                      if(strcmp($1.typeVar,$3.typeVar)==0)
+                      Element* op2=pop(&S);
+                      Element* op1=pop(&S);
+                      if(strcmp(op1->type,op2->type)==0)
                       {
-                        strcpy(temp,$1.str);
-                        strcat(temp,"*");
-                        strcat(temp,$3.str);
-                        strcpy($$.str,temp);
-                        strcpy($$.typeVar,$1.typeVar);
-                        quad(&teteQ,&q,"*",$1.str,$3.str,temp);
 
+                        strcpy(temp,op1->name);
+                        strcat(temp,"*");
+                        strcat(temp,op2->name);
+                        quad(&teteQ,&q,"*",op1->name,op2->name,temp);
+                        push(&S,"Term",temp,op1->type);
                       }
                       else
                       {
@@ -461,17 +421,16 @@ Term
                     }
 
  | Term '/' Factor  {
-
-                      if(strcmp($1.typeVar,$3.typeVar)==0)
+                      Element* op2=pop(&S);
+                      Element* op1=pop(&S);
+                      if(strcmp(op1->type,op2->type)==0)
                       {
 
-                        strcpy(temp,$1.str);
+                        strcpy(temp,op1->name);
                         strcat(temp,"/");
-                        strcat(temp,$3.str);
-                        strcpy($$.str,temp);
-                        strcpy($$.typeVar,$1.typeVar);
-                        quad(&teteQ,&q,"/",$1.str,$3.str,temp);
-
+                        strcat(temp,op2->name);
+                        quad(&teteQ,&q,"/",op1->name,op2->name,temp);
+                        push(&S,"Term",temp,op1->type);
                       }
                       else
                       {
@@ -480,96 +439,86 @@ Term
                     }
 
  | Factor           {
-
-                      strcpy($$.str,$1.str);
-                      strcpy($$.typeVar,$1.typeVar);
-
+                      Element* op=pop(&S);
+                      push(&S,"Term",op->name,op->type);
+                      strcpy(temp,op->name);
+                      //quad(&teteQ,&q,"",op->name,"",temp);
                     }
  ;
 
 Factor
  : IDF                {
-
+                        AffRightType=getType(L,$1);
                         natIDF=getNat(L,$1);
-
+                        //strcpy(idfVal,$1);
                         if (natIDF==1)     {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) est un tableau \n\n" RESET,yylineno,$1); return 0;}
                         if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
                         int t=getType(L,$1);
                         sprintf(ch,"%d",t);
-                        strcpy($$.str,$1);
-                        strcpy($$.typeVar,ch);
-
+                        push(&S,"Factor",$1,ch);
                       }
  | IDF '[' Expression ']' {
-                           AffleftType=getType(L,$1);
-
+                           AffRightType=getType(L,$1);
+                           sizeIDF=getSize(L,$1);
                            natIDF=getNat(L,$1);
-
+                           //strcpy(idfVal,$1);
                            if (natIDF!=1) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) n'est pas un tableau\n\n" RESET,yylineno,$1); return 0;}
                            if (srch(L,$1)==0) {printf(RED"\n-----> ligne %d .ERREUR : l'IDF (%s) non déclaré\n\n" RESET,yylineno,$1); return 0;}
                            int t=getType(L,$1);
                            sprintf(ch,"%d",t);
-
+                          //  char tm[100];
+                          //  strcpy(tm,"[");
+                          //  strcat(tm,temp);
+                          //  strcat(tm,"]");
+                          //  strcat($1,tm);
+                           push(&S,"Factor",$1,ch);
                            strcpy(chTab,$1);
                            strcat(chTab,"[");
                            strcat(chTab,temp);
                            strcat(chTab,"]");
-                           strcpy($$.str,chTab);
-                           char c[255];
-                           char* sign=getSignByType(AffleftType);
-
-                           if(strcmp(sign,"%s")!=0)
-                           {
-                             sprintf(c,sign,AffleftType);
-                             strcpy($$.typeVar,c);
-                           }
-                           else
-                           strcpy($$.typeVar,"2");
-                           quad(&teteQ,&q,chTab,"","",$3.str);
-
+                           quad(&teteQ,&q,chTab,"","",chTab);
+                           //if ($3>=sizeIDF) {printf(RED"\n-----> ligne %d .ERREUR : Dérnier indice du tableau (%s) dépassé de %d \n\n" RESET,yylineno,$1,$3-sizeIDF+1); return 0;}
                           }
 
  | Entier              {
-
+                         AffRightType=0;
+                         //sprintf(idfVal,"%d",$1);
+                         //sprintf(ch,"%d",t);
+                         //char chInt[10];
                          sprintf(chInt,"%d",$1);
                          sprintf(ch,"%d",0);
-                         strcpy($$.str,chInt);
-                         strcpy($$.typeVar,ch);
-
+                         push(&S,"Factor",chInt,ch);
                        }
 
  | real                {
-
+                         AffRightType=1;
+                         //sprintf(idfVal,"%f",$1);
+                         //sprintf(ch,"%d",t);
+                         //char cheFloat[10];
                          sprintf(chInt,"%f",$1);
                          sprintf(ch,"%d",1);
-                         strcpy($$.str,chInt);
-                         strcpy($$.typeVar,ch);
-
+                         push(&S,"Factor",chInt,ch);
                        }
 
  | str                 {
-
+                         AffRightType=2;
+                         //strcpy(idfVal,$1);
+                         //sprintf(ch,"%d",t);
                          sprintf(ch,"%d",2);
-
-                         strcpy($$.str,$1);
-                         strcpy($$.typeVar,ch);
+                         push(&S,"Factor",$1,ch);
                        }
 
  | '(' Expression ')'  {
-
+                        Element* p=pop(&S);
                         char tmp[100];
                         strcpy(tmp,"(");
-                        strcat(tmp,$2.str);
+                        strcat(tmp,p->name);
                         strcat(tmp,")\0");
-
-                        strcpy($$.str,tmp);
-                        strcpy($$.typeVar,$2.typeVar);
+                        push(&S,"Factor",tmp,p->type);
                        }
  | '-' Factor          {
-
-                         strcpy($$.str,"-");
-                         strcat($$.str,$2.str);
-                         strcpy($$.typeVar,$2.typeVar);
+                         Element* op=pop(&S);
+                         push(&S,"Factor",op->name,op->type);
                        }
  ;
 
@@ -595,13 +544,13 @@ int getTypeBySign(char* sign)
 }
 char* getSignByType(int type)
 {
-  char* sign=malloc(3*sizeof(char));
-  sign[2]='\0';
+  char* sign=malloc(5*sizeof(char));
+  sign[4]='\0';
   switch (type)
   {
-    case 0: { strcpy(sign,"%d"); } break;
-    case 1: { strcpy(sign,"%f");} break;
-    case 2: { strcpy(sign,"%s");} break;
+    case 0: { strcpy(sign,"\"%d\""); } break;
+    case 1: { strcpy(sign,"\"%f\"");} break;
+    case 2: { strcpy(sign,"\"%s\"");} break;
     default: { printf("Error\n");} break;
   }
   return sign;
@@ -626,6 +575,7 @@ int main()
          "|"GRN"Programm accepted"RESET"      |\n"
          "-------------------------\n"
     );
+    //showStack(S);
 
   return 0;
   /*printf(RED "red\n" RESET);
